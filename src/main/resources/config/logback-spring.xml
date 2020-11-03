@@ -1,0 +1,9 @@
+<!-- 日志输出级别 -->
+<root level="info">
+    <appender-ref ref="FILE-INFO"/>
+</root>
+
+<!-- 如果想将mybatis-sql[info]日志单独输出到一个文件中，就加上如下配置 -->
+<!-- <logger name="com.jiafupeng.util.MySlf4jImpl" level="info" additivity="false">-->
+<!-- <appender-ref ref="FILE-SQL"/>-->
+<!-- </logger>-->

@@ -1,0 +1,23 @@
+package ${package}.dao;
+
+import ${package}.domain.${className}DO;
+
+import java.util.List;
+import com.just.hades.operate.dao.mapper.${className}Mapper;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+/**
+ * ${comments}
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Repository
+public class ${className}Dao {
+
+    @Autowired
+    private ${className}Mapper ${classname}Mapper;
+
+}

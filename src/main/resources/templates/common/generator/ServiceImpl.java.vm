@@ -1,0 +1,58 @@
+package ${package}.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import ${package}.dao.${className}Dao;
+import ${package}.domain.${className}DO;
+import ${package}.vo.${className}Rsp;
+import ${package}.vo.${className}Req;
+import ${package}.service.${className}Service;
+
+
+
+@Service
+public class ${className}ServiceImpl implements ${className}Service {
+	@Autowired
+	private ${className}Dao ${classname}Dao;
+	
+	@Override
+	public ${className}Rsp get(${pk.attrType} ${pk.attrname}){
+		return null;
+	}
+	
+	@Override
+	public List<${className}Rsp> list(Map<String, Object> map){
+		return null;
+	}
+	
+	@Override
+	public int count(Map<String, Object> map){
+		return 0;
+	}
+	
+	@Override
+	public int save(${className}Req ${classname}){
+		return 0;
+	}
+	
+	@Override
+	public int update(${className}Req ${classname}){
+		return 0;
+	}
+	
+	@Override
+	public int remove(${pk.attrType} ${pk.attrname}){
+		return 0;
+	}
+	
+	@Override
+	public int batchRemove(${pk.attrType}[] ${pk.attrname}s){
+		return 0;
+	}
+	
+}

@@ -1,0 +1,36 @@
+package ${package}.dao;
+
+import ${package}.domain.${className}DO;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Mapper
+public interface ${className}Mapper {
+
+    ${className}DO get(${pk.attrType} ${pk.attrname});
+
+    List<${className}DO> list(Map<String,Object> map);
+
+    int count(Map<String,Object> map);
+
+    int save(${className}DO ${classname});
+
+    int update(${className}DO ${classname});
+
+    int remove(${pk.attrType} ${pk.columnName});
+
+    int batchRemove(${pk.attrType}[] ${pk.attrname}s);
+}

@@ -1,0 +1,125 @@
+package ${package}.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import com.just.athena.control.common.bean.PageInfo;
+import com.just.athena.control.common.enums.HttpResultCode;
+import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import io.swagger.annotations.*;
+
+import ${package}.vo.${className}Rsp;
+import ${package}.vo.${className}Req;
+import ${package}.service.${className}Service;
+import com.just.athena.control.common.util.Query;
+import com.just.athena.control.common.bean.HttpResult;
+
+import java.util.HashMap;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+
+@Controller
+@RequestMapping("/app")
+@Api(description = "xxxxx接口")
+public class ${className}AppController {
+
+    @Autowired
+    private ${className}Service ${classname}Service;
+
+    /**
+    * 查询列表数据
+    * @param page 页数
+    * @param pageSize 每页条数
+    * @return
+    */
+    @ResponseBody
+    @GetMapping("/v1.0/${classname}s")
+    @ApiOperation(value = "列表查询")
+    public HttpResult list(@ApiParam(value = "查询页数") @RequestParam(value = "page" , required = true) Integer page,
+                         @ApiParam(value = "每页条数") @RequestParam(value = "pageSize" , required = true) Integer pageSize) {
+        Map params = new HashMap();
+        params.put( "offset", (page - 1) * pageSize);
+        params.put( "limit", pageSize);
+        Query query = new Query(params);
+        List<${className}Rsp> ${classname}ListRsp = ${classname}Service.list(query);
+        int total = ${classname}Service.count(query);
+        PageInfo pageInfo = new PageInfo(page, pageSize, total, ${classname}ListRsp);
+        HttpResult result = new HttpResult<>(pageInfo);
+        return result;
+    }
+
+    /**
+    * 根据id查询
+    * @param id
+    */
+    @ResponseBody
+    @GetMapping("/v1.0/${classname}s/{id}")
+    @ApiOperation(value = "根据id查询")
+    public HttpResult get(@ApiParam(value = "查询的id") @PathVariable( required = true) ${pk.attrType} id) {
+        ${className}Rsp ${classname}Rsp = ${classname}Service.get(id);
+        HttpResult result = new HttpResult<>(${classname}Rsp);
+        return result;
+    }
+
+    /**
+     * 修改指定id的信息
+     */
+    @ResponseBody
+    @PutMapping("/v1.0/${classname}s/{id}")
+    @ApiOperation(value = "修改")
+    public HttpResult update(@ApiParam(value = "查询的id") @PathVariable( required = true) ${pk.attrType} id, @RequestBody ${className}Req ${classname}Req) {
+        if (${classname}Service.update(${classname}Req) >= 0) {
+            return new HttpResult();
+        }
+        return new HttpResult(HttpResultCode.FAIL);
+    }
+
+    /**
+     * 创建新的
+     */
+    @ResponseBody
+    @PostMapping("/v1.0/${classname}s")
+    @ApiOperation(value = "新建")
+    public HttpResult save(@RequestBody ${className}Req ${classname}) {
+        if (${classname}Service.save(${classname}) >= 0) {
+            return new HttpResult();
+        }
+        return new HttpResult(HttpResultCode.FAIL);
+    }
+
+    /**
+     * 根据单个ID删除
+     */
+    @ResponseBody
+    @DeleteMapping("/v1.0/${classname}s/{id}")
+    @ApiOperation(value = "单个ID删除")
+    public HttpResult remove(@ApiParam(value = "删除的id") @PathVariable( required = true) ${pk.attrType} id) {
+        if (${classname}Service.remove(${pk.attrname}) >= 0) {
+            return new HttpResult();
+        }
+        return new HttpResult(HttpResultCode.FAIL);
+    }
+
+    /**
+     * 根据id数组批量删除
+     */
+    @ResponseBody
+    @DeleteMapping("/v1.0/${classname}s")
+    @ApiOperation(value = "批量删除")
+    public HttpResult remove(@ApiParam(value = "删除的id数组") @RequestParam("ids[]") ${pk.attrType}[] ${pk.attrname}s) {
+        if (${classname}Service.batchRemove(${pk.attrname}s) >= 0) {
+            return new HttpResult();
+        }
+        return new HttpResult(HttpResultCode.FAIL);
+    }
+
+}
